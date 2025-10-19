@@ -2,12 +2,13 @@
 import { GoogleGenAI } from "@google/genai";
 import { Fortune, UserInfo } from '../types';
 
-if (!process.env.API_KEY) {
-    throw new Error("API_KEY environment variable not set");
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY; 
+
+if (!apiKey) {
+  throw new Error("API key is missing or invalid!");
 }
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
+const ai = new GoogleGenAI({ apiKey });
 export const getFortune = async (userInfo: UserInfo): Promise<Fortune> => {
   const { name, year, month, day, bloodType, zodiacSign } = userInfo;
 
