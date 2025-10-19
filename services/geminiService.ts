@@ -8,7 +8,8 @@ if (!apiKey) {
   throw new Error("API key is missing or invalid!");
 }
 
-const ai = new GoogleGenAI({ apiKey });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
 export const getFortune = async (userInfo: UserInfo): Promise<Fortune> => {
   const { name, year, month, day, bloodType, zodiacSign } = userInfo;
 
